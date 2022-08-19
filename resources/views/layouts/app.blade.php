@@ -19,7 +19,7 @@
     <!-- main css -->
     <link rel="stylesheet" href="{{asset('page_template/css/style.css')}}">
     <link rel="stylesheet" href=" {{asset('page_template/css/responsive.css')}}">
-
+    <link rel="stylesheet" href="sweetalert2.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -46,7 +46,7 @@
 <script src="{{asset('page_template/js/stellar.js')}}"></script>
 <script src=" {{asset('page_template/vendors/lightbox/simpleLightbox.min.js')}}"></script>
 <script src="{{asset('page_template/js/custom.js')}}"></script>
-
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript" src="https://maps.google.com/maps/api/js?&libraries=places&language=en&key={{config('app.google_map_key') }}&callback=initMap" defer></script>
 {{--<script type="text/javascript" src="https://maps.google.com/maps/api/js?&libraries=places&language=en&key={{config('app.google_map_key') }}&callback=headerinitMap" defer></script>--}}
 <script type="text/javascript"
@@ -64,6 +64,93 @@
 {{--<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>--}}
 {{--<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />--}}
 
+
+<script>
+    import swal from 'sweetalert2';
+    window.Swal = swal;
+
+</script>
+
+
+
+
+<script type="text/javascript">
+
+
+
+    function Swalconfirm(data){
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: data.massage,
+            showConfirmButton: false,
+            timer: 1500
+        });
+ setTimeout(function(){
+    window.location.reload(1);
+}, 1500);
+
+ setTimeout()
+
+    }
+    $(document).on('click','.save_room',function (event) {
+        event.preventDefault();
+        let id=$(this).val();
+        let url=$('.save_room_url').data('save');
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': "{{csrf_token()}}",
+            },
+            url: url,
+            method: "GET",
+            data: {id:id},
+        }).done(function (data) {
+             Swalconfirm(data);
+        });
+
+    });
+
+    $(document).on('click','.forgot_room',function (event) {
+        event.preventDefault();
+        let id=$(this).val();
+        let url=$('.save_room_url').data('forgot');
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': "{{csrf_token()}}",
+            },
+            url: url,
+            method: "GET",
+            data: {id:id},
+        }).done(function (data) {
+
+            Swalconfirm(data);
+        });
+
+    });
+
+    $(document).on('click','.forgot_seve_room',function (event) {
+        event.preventDefault();
+        let id=$(this).val();
+        var url = '{{ route("forgot_room", ":id") }}';
+        url = url.replace(':id', id);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': "{{csrf_token()}}",
+            },
+            url: url,
+            method: "GET",
+            data: {id:id},
+        }).done(function (data) {
+
+            Swalconfirm(data);
+        });
+
+    })
+
+
+
+
+</script>
 
 <script type="text/javascript">
     let header_map;

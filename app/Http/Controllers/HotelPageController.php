@@ -10,7 +10,13 @@ use App\Models\Rooms;
 use Illuminate\Http\Request;
 use App\Models\Hotels;
 use Carbon\CarbonPeriod;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
+use function PHPSTORM_META\type;
+
+
 class HotelPageController extends Controller
 {
     public function index(Request $request)
@@ -134,7 +140,12 @@ class HotelPageController extends Controller
             ]);
             return response()->json(['success'=>'Success booking']);
         }
-
+        if (Session::has('room_id')){
+            $saveRooms=Session::get('room_id');
+        }else
+            {
+            $saveRooms=[];
+        }
         $room=Rooms::find($id);
         $hotel = Hotels::where(['id' => $room->hotel_id])->first();
         $hotels = Hotels::orderBy('name')->get();
@@ -142,8 +153,7 @@ class HotelPageController extends Controller
         $room_types=RoomTypes::all();
         $room_images=RoomImage::where('room_id',$id)->get();
         $busy_days=Booking::where('room_id',$id)->get();
-        return view('booking_room', compact('hotel','hotels','room_types','rooms','room','room_images','busy_days'));
-
+        return view('booking_room', compact('hotel','hotels','room_types','rooms','room','room_images','busy_days','saveRooms'));
     }
     public function rooms(Request $request){
 
@@ -200,8 +210,6 @@ class HotelPageController extends Controller
             return $view_data;
             }
         }
-
-
         $rooms=Rooms::all();
         $count= $rooms->count();
         $room_types=RoomTypes::all();
@@ -223,6 +231,34 @@ class HotelPageController extends Controller
         Mail::to('kaghinloft@gmail.com')->send(new \App\Mail\SendMail($details));
 
         return redirect('/');
+
+    }
+
+    public function saveRoom( $id, Request $request){
+        $rooms= Session::get('room_id');
+        $list = new Collection($rooms);
+        if (!$list->contains($id)) {
+            session()->push('room_id',$id);
+
+            return response(['massage'=>'The Room saved']);
+        }
+    }
+
+
+    public function ShowSaveRoom(){
+
+        $rooms= Session::get('room_id');
+        $saveRooms=Rooms::whereIn('id',$rooms)->get();
+        return  view('save_rooms',compact('saveRooms'));
+
+    }
+
+    public function forgotRoom($id){
+
+      $key = array_search( $id, Session::get('room_id'));
+        Session::forget('room_id.' . $key);
+
+        return response(['massage'=>'The Room is forgotten']);
 
     }
 }

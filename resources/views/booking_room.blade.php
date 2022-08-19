@@ -12,7 +12,7 @@
             </div>
         </div>
     </section>
-    <section class="accomodation_area section_gap ">
+    <section class="accomodation_area section_gap  save_room_url" data-save="{{route('save_room',$room->id)}}" data-forgot="{{route('forgot_room',$room->id)}}">
         <h4 class="title_color" style="text-align: center">{{$hotel->name}} </h4>
         <div class="">
             <div class="row ">
@@ -76,6 +76,21 @@
                                     style="width: 231px;height: 55px;left: 12px;top: 412px;background: #6D8B74; color: white">Book NOW
                             </button>
                         </div>
+                            @if(in_array($room->id, $saveRooms))
+                            <div class="elem-group " style=" text-align: center; margin: 10px;">
+                                <button type="submit" class="forgot_room" value="{{$room->id}}"
+                                        style="width: 231px;height: 55px;left: 12px;top: 412px;background: #365454 ; color: white">
+                                    Forgot Room
+                                </button>
+                            </div>
+                           @else
+                            <div class="elem-group " style=" text-align: center; margin: 10px;">
+                                <button type="submit" class="save_room" value="{{$room->id}}"
+                                        style="width: 231px;height: 55px;left: 12px;top: 412px;background: #365454 ; color: white">
+                                    Save Room
+                                </button>
+                            </div>
+                         @endif
                     </div>
                 </div>
             </div>
@@ -251,7 +266,6 @@ line-height: 26px;text-transform: uppercase;"  id="myModalLabel">Checklist</h4>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
                     <button type="submit" class="booking" value="{{$room->id}}"
                     style="width: 231px;height: 55px;left: 12px;top: 412px;background: #6D8B74; color: white">Book NOW
                     </button>

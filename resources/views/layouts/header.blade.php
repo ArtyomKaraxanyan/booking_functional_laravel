@@ -9,7 +9,7 @@
                 <li class="nav-item"><butaton class=" btn nav-link our_address" data-toggle="modal" data-target="#myModalMap" style="margin-right: 40px;  text-transform: capitalize;font-family: 'Playfair Display';font-style: normal;font-weight: 400;font-size: 20px;line-height: 25px;color: #FFFFFF;" ><i class="fa fa-map-marker" style="color: #6D8B74" aria-hidden="true"></i> Address 1</butaton></li>
                 <li class="nav-item"><butaton class=" btn nav-link" data-toggle="modal" data-target="#myModalGmail" href="" style="margin-right: 40px;  text-transform: lowercase;font-family: 'Playfair Display';font-style: normal;font-weight: 400;font-size: 20px;line-height: 25px;color: #FFFFFF;"><i class="fa fa-envelope-open" aria-hidden="true" style="color: #6D8B74"></i> hotel@gmail.com</butaton></li>
                 <li class="nav-item"><p class="nav-link"  style="margin-right: 20px;font-family: 'Playfair Display';font-style: normal;font-weight: 400;font-size: 20px;line-height: 25px;color: #FFFFFF;"><i class="fa fa-phone" aria-hidden="true" style="color: #6D8B74"></i> +960 20 30 50</p></li>
-            </ul>
+             </ul>
             <hr  style="position: absolute;width: 543px;left: 672px;top: 40px;border: 1px solid #5F7161"><br>
             <div class="collapse navbar-collapse " id="">
                 <ul class="nav navbar-nav menu_nav ml-auto">
@@ -17,10 +17,18 @@
                     <li class="nav-item"><a class="nav-link" href="" style="margin-top: 25px; margin-right: 25px;font-family: 'Playfair Display';font-style: normal;font-size: 15px;color: #FFFFFF">About us</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{asset(route('rooms'))}}" style="margin-top: 25px;margin-right: 25px;font-family: 'Playfair Display';font-style: normal;font-size: 15px;color: #FFFFFF">Rooms</a></li>
                     <li class="nav-item"><a class="nav-link" href="" style="margin-top: 25px;margin-right: 25px;font-family: 'Playfair Display';font-style: normal;font-size: 15px;color: #FFFFFF">Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="" style="margin-top: 25px;margin-right: 117px;font-family: 'Playfair Display';font-style: normal;font-size: 15px;color: #FFFFFF">Contacts</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href=""   @if( Session::has('room_id')) style="margin-top: 25px;margin-right: 8px;font-family: 'Playfair Display';font-style: normal;font-size: 15px;color: #FFFFFF"
+
+                                            @else  style="margin-top: 25px;margin-right: 77px;font-family: 'Playfair Display';font-style: normal;font-size: 15px;color: #FFFFFF"  @endif  >Contacts</a></li>
 
                 </ul><br>
             </div>
+            <ul>
+
+                @if( Session::has('room_id'))<li class="nav-item"><a href="{{asset(url('save/rooms'))}}"><i class="fa fa-shopping-cart" aria-hidden="true" style="font-size:30px;color:#365454;margin-right: 35px;"></i></a>
+                 <p  class="" style="margin-top: -40px;color: red;margin-left: 35px;">{{count(Session::get('room_id'))}}</p></li>@endif
+            </ul>
         </nav>
 
 </header>

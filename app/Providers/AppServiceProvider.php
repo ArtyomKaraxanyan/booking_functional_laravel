@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Hotels;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +24,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $hotels=Hotels::all();
+        view()->composer('*', function($view) use($hotels) {
+            $view->with('hotels', $hotels);
+        });
     }
 }

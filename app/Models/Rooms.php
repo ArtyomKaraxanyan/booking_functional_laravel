@@ -19,6 +19,11 @@ class Rooms extends Model
     public  function  bookings(){
         return $this->hasMany(Booking::class,'room_id');
     }
+    public  function  hotel(){
+        return $this->belongsTo(Hotels::class);
+
+
+    }
 
     public function getImagePathAttribute(){
         return $this->images()->count() ? $this->images()->first()->path : '';

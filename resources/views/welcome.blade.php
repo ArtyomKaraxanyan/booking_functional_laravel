@@ -2,6 +2,7 @@
 @extends('layouts.app')
 @section('content')
 
+    {{--{{dd(Session::get('room'))}}--}}
 <section class="banner_area">
     <div class="booking_table d_flex align-items-center">
         <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0"
@@ -14,7 +15,6 @@
         {{--<a href="#" class="btn theme_btn button_hover">Get Started</a>--}}
         {{--</div>--}}
         {{--</div>--}}
-
         <div class="col-md-12 ">
             <div class="boking_table">
                 <div class="row justify-content-center" style=" margin-top: 350px" id="filters">

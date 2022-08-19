@@ -20,7 +20,9 @@ Route::get('/booking/room/{id}', [App\Http\Controllers\HotelPageController::clas
 Route::get('/rooms', [App\Http\Controllers\HotelPageController::class,'rooms'])->name('rooms');
 
 Route::get('/hotel/rooms/{id}', [App\Http\Controllers\HotelPageController::class,'check_availability'])->name('check_availability');
-
+Route::get('/save/room/{id}', [App\Http\Controllers\HotelPageController::class,'saveRoom'])->name('save_room');
+Route::get('/save/rooms/', [App\Http\Controllers\HotelPageController::class,'ShowSaveRoom'])->name('show_save_room');
+Route::get('/forgot/rooms/{id}', [App\Http\Controllers\HotelPageController::class,'forgotRoom'])->name('forgot_room');
 
 
 Route::get('admin', function () {
