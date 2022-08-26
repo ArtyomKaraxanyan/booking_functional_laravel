@@ -71,11 +71,18 @@
 
 </script>
 
-
-
-
 <script type="text/javascript">
-
+    function SwalNotRoom(){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'You have not saved room',
+        });
+    }
+       $(document).on('click','.show_save_rooms',function (e) {
+           e.preventDefault();
+               SwalNotRoom()
+       });
 
 
     function Swalconfirm(data){

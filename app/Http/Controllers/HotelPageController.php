@@ -246,9 +246,15 @@ class HotelPageController extends Controller
 
     public function ShowSaveRoom(){
 
-        $rooms= Session::get('room_id');
-        $saveRooms=Rooms::whereIn('id',$rooms)->get();
-        return  view('save_rooms',compact('saveRooms'));
+
+        if(Session::has('room_id')){
+            $rooms= Session::get('room_id');
+            $saveRooms=Rooms::whereIn('id',$rooms)->get();
+            return  view('save_rooms',compact('saveRooms'));
+        }else{
+
+            return  redirect(url('/'));
+        }
 
     }
 
