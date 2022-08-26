@@ -1,6 +1,6 @@
 
 
-@foreach( $hotels as $hotel)
+@foreach( $hotels_search as $hotel)
     {{--{{dd($hotel->rooms_type_count)}}--}}
     <div class="col-lg-4 col-sm-6" id="hotel-{{$hotel->id}}" data-image="{{$hotel->image_path}}" data-min="{{$hotel->rooms_min_price}}" data-count=" {{$hotel->rooms_count}}">
         <div class="accomodation_item">

@@ -23,46 +23,45 @@ class HotelPageController extends Controller
     {
 
         if   ($request->ajax()) {
-            $city = $request->city;
-            $start = $request->start_date;
-            $end = $request->end_date;
-            $type = $request->room_type;
+        $city = $request->city;
+        $start = $request->start_date;
+        $end = $request->end_date;
+        $type = $request->room_type;
 
-            if ($request->location==null){
-                $city=null;
-            }
-            $hotels = Hotels::query();
-            if ($city){
-                $hotels = $hotels->where(['city' => $city]);
-            }
-            if ($start || $end) {
-                $hotels = $hotels->whereHas('rooms', function ($q) use ($start, $end) {
-                    $q->doesntHave('bookings')->orWhereHas('bookings', function ($q) use ($start, $end) {
-                        if ($start && $end) {
-                            $q->whereNotBetween('start', [$start, $end])->whereNotBetween('end', [$start, $end])->whereRaw('? not between start and end', [$start])->whereRaw('? not between start and end', [$end]);
-                        } elseif ($start && !$end) {
-                            $q->whereRaw('? not between start and end', [$start]);
-                        } elseif (!$start && $end) {
-                            $q->whereRaw('? not between start and end', [$end]);
-                        }
-
-                    });
-
-                });
-            }
-            if($type){
-                $hotels = $hotels->whereHas('rooms', function ($q) use ($type) {
-                    $q->where(['type' => $type]);
-                });
-            }
-
-            $hotels = $hotels->get();
-            $view_data['get_hotels'] = $hotels;
-            $view_data['address'] = $city;
-            $view_data['hotels'] = view('partials.hotel_search', compact('hotels'))->render();
-
-            return $view_data;
+        if ($request->location==null){
+            $city=null;
         }
+        $query = Hotels::orderBy('id','desc');
+        if ($city){
+            $query->where(['city' => $city]);
+        }
+        if($type){
+            $query->whereHas('rooms', function ($q) use ($type) {
+                $q->where(['type' => $type]);
+            });
+        }
+        if ($start || $end) {
+            $query->whereHas('rooms', function ($q) use ($start, $end) {
+                $q->doesntHave('bookings')->orWhereHas('bookings', function ($q) use ($start, $end) {
+                    if ($start && $end) {
+                        $q->whereNotBetween('start', [$start, $end])->whereNotBetween('end', [$start, $end])->whereRaw('? not between start and end', [$start])->whereRaw('? not between start and end', [$end]);
+                    } elseif ($start && !$end) {
+                        $q->whereRaw('? not between start and end', [$start]);
+                    } elseif (!$start && $end) {
+                        $q->whereRaw('? not between start and end', [$end]);
+                    }
+
+                });
+
+            });
+        }
+
+        $hotels_search = $query->get();
+        $view_data['get_hotels'] = $hotels_search;
+        $view_data['address'] = $city;
+        $view_data['hotels'] = view('partials.hotel_search', compact('hotels_search'))->render();
+        return $view_data;
+    }
 
         $hotels = Hotels::orderBy('name')->get();
 //        $room_type_count = Hotels::whereHas('rooms')->get();

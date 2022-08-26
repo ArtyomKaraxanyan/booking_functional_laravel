@@ -379,7 +379,6 @@
     //Search hotels and filters
 
     $(document).on('click', '.cheek_now', function () {
-
         let map;
         function globalMap() {
             let geocoder = new google.maps.Geocoder();
@@ -462,6 +461,7 @@
             method: "GET",
             data: data,
         }).done(function (data) {
+
             $('.hotel_search').html(data.hotels);
             $('.services').empty();
             $('.cat_rooms').empty();
