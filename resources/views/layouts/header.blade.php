@@ -17,17 +17,18 @@
                     <li class="nav-item"><a class="nav-link" href="" style="margin-top: 25px; margin-right: 25px;font-family: 'Playfair Display';font-style: normal;font-size: 15px;color: #FFFFFF">About us</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{asset(route('rooms'))}}" style="margin-top: 25px;margin-right: 25px;font-family: 'Playfair Display';font-style: normal;font-size: 15px;color: #FFFFFF">Rooms</a></li>
                     <li class="nav-item"><a class="nav-link" href="" style="margin-top: 25px;margin-right: 25px;font-family: 'Playfair Display';font-style: normal;font-size: 15px;color: #FFFFFF">Services</a></li>
-
-                    <li class="nav-item"><a class="nav-link" href=""   @if( Session::has('room_id')) style="margin-top: 25px;margin-right: 8px;font-family: 'Playfair Display';font-style: normal;font-size: 15px;color: #FFFFFF"
-
-                                            @else  style="margin-top: 25px;margin-right: 77px;font-family: 'Playfair Display';font-style: normal;font-size: 15px;color: #FFFFFF"  @endif  >Contacts</a></li>
-
+                    <li class="nav-item"><a class="nav-link" href="" style="margin-top: 25px;margin-right: 8px;font-family: 'Playfair Display';font-style: normal;font-size: 15px;color: #FFFFFF"
+                        >Contacts</a></li>
                 </ul><br>
             </div>
             <ul>
-
-                @if( Session::has('room_id'))<li class="nav-item"><a href="{{asset(url('save/rooms'))}}"><i class="fa fa-shopping-cart" aria-hidden="true" style="font-size:30px;color:#365454;margin-right: 35px;"></i></a>
-                 <p  class="" style="margin-top: -40px;color: red;margin-left: 35px;">{{count(Session::get('room_id'))}}</p></li>@endif
+                @if(count(Session::get('room_id'))>0)
+                    <li  class="nav-item"><a href="{{asset(url('save/rooms'))}}"><i class="fa fa-shopping-cart" aria-hidden="true" style="font-size:30px;color:#365454;margin-right: 35px;"></i></a></li>
+                        <p  class="" style="margin-top: -40px;color: red;margin-left: 35px;"> @if( Session::has('room_id')) {{count(Session::get('room_id'))}} @else 0</p>@endif
+                    @else
+                    <li  class="nav-item show_save_rooms" ><a href="{{asset(url('save/rooms'))}}"><i class="fa fa-shopping-cart" aria-hidden="true" style="font-size:30px;color:#365454;margin-right: 35px;"></i></a></li>
+                        <p  class="" style="margin-top: -40px;color: red;margin-left: 35px;"> @if( Session::has('room_id')) {{count(Session::get('room_id'))}} @else 0</p>@endif
+                    @endif
             </ul>
         </nav>
 
@@ -79,7 +80,6 @@ line-height: 26px;text-transform: uppercase;"  id="myModalLabel">Send Message</h
         </div>
     </div>
 </div>
-
 <div class="modal fade" id="myModalMap" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

@@ -246,17 +246,21 @@ class HotelPageController extends Controller
 
     public function ShowSaveRoom(){
 
-        $rooms= Session::get('room_id');
-        $saveRooms=Rooms::whereIn('id',$rooms)->get();
-        return  view('save_rooms',compact('saveRooms'));
+        if(Session::has('room_id')){
+            $rooms= Session::get('room_id');
+            $saveRooms=Rooms::whereIn('id',$rooms)->get();
+            return  view('save_rooms',compact('saveRooms'));
+        }
 
     }
 
     public function forgotRoom($id){
-
-      $key = array_search( $id, Session::get('room_id'));
-        Session::forget('room_id.' . $key);
-
+          $test=Session::get('room_id');
+          $key = array_search( $id, $test);
+          Session::forget('room_id.' . $key);
+          if (count(Session::get('room_id'))<0){
+              return redirect(url('/'));
+          }
         return response(['massage'=>'The Room is forgotten']);
 
     }
