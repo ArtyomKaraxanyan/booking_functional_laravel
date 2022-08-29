@@ -1,5 +1,9 @@
 @extends('layouts.app')
 @section('content')
+    @if(count(session()->get('room_id'))<1)
+
+        <script>window.location = "/";</script>
+    @else
     <section class="banner_area">
         <div class="booking_table d_flex align-items-center ">
             <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0"
@@ -105,4 +109,6 @@
             </div>
         </div>
     </section>
+    @endif
+
 @endsection

@@ -22,9 +22,13 @@
                 </ul><br>
             </div>
             <ul>
-
-                    <li class="nav-item @if(session()->has('room_id'))show_save_rooms"@endif><a href="{{asset(url('save/rooms'))}}"><i class="fa fa-shopping-cart" aria-hidden="true" style="font-size:30px;color:#365454;margin-right: 35px;"></i></a></li>
+                @if(count(Session::get('room_id'))>0)
+                    <li  class="nav-item"><a href="{{asset(url('save/rooms'))}}"><i class="fa fa-shopping-cart" aria-hidden="true" style="font-size:30px;color:#365454;margin-right: 35px;"></i></a></li>
                         <p  class="" style="margin-top: -40px;color: red;margin-left: 35px;"> @if( Session::has('room_id')) {{count(Session::get('room_id'))}} @else 0</p>@endif
+                    @else
+                    <li  class="nav-item show_save_rooms" ><a href="{{asset(url('save/rooms'))}}"><i class="fa fa-shopping-cart" aria-hidden="true" style="font-size:30px;color:#365454;margin-right: 35px;"></i></a></li>
+                        <p  class="" style="margin-top: -40px;color: red;margin-left: 35px;"> @if( Session::has('room_id')) {{count(Session::get('room_id'))}} @else 0</p>@endif
+                    @endif
             </ul>
         </nav>
 

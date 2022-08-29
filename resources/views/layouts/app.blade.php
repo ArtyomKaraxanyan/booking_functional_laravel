@@ -98,7 +98,6 @@
 }, 1500);
 
  setTimeout()
-
     }
     $(document).on('click','.save_room',function (event) {
         event.preventDefault();
