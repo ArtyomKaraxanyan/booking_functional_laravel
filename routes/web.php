@@ -23,6 +23,7 @@ Route::get('/hotel/rooms/{id}', [App\Http\Controllers\HotelPageController::class
 Route::get('/save/room/{id}', [App\Http\Controllers\HotelPageController::class,'saveRoom'])->name('save_room');
 Route::get('/save/rooms/', [App\Http\Controllers\HotelPageController::class,'ShowSaveRoom'])->name('show_save_room')->middleware('save_rooms');
 Route::get('/forgot/rooms/{id}', [App\Http\Controllers\HotelPageController::class,'forgotRoom'])->name('forgot_room');
+Route::get('/get-api', [App\Http\Controllers\HomeController::class,'get_api'])->name('get_api');
 
 
 Route::get('admin', function () {

@@ -6,7 +6,7 @@
                 <a  class="header_logo" href="/" style="">Hotel</a></h2>
 
              <ul class="nav navbar-nav menu_nav ml-auto" style="position: absolute;width: 600px;left: 665px;top: 20px;">
-                <li class="nav-item"><butaton class=" btn nav-link our_address" style="margin-right: 40px;  text-transform: capitalize;font-family: 'Playfair Display';font-style: normal;font-weight: 400;font-size: 20px;line-height: 25px;color: #FFFFFF;" ><i class="fa fa-map-marker" style="color: #6D8B74" aria-hidden="true"></i> Address 1</butaton></li>
+                <li class="nav-item"><a  href="{{route('get_api')}}" class=" btn nav-link our_address" style="margin-right: 40px;  text-transform: capitalize;font-family: 'Playfair Display';font-style: normal;font-weight: 400;font-size: 20px;line-height: 25px;color: #FFFFFF;" ><i class="fa fa-map-marker" style="color: #6D8B74" aria-hidden="true"></i> Address 1</a></li>
                 <li class="nav-item"><butaton class=" btn nav-link" data-toggle="modal" data-target="#myModalGmail" href="" style="margin-right: 40px;  text-transform: lowercase;font-family: 'Playfair Display';font-style: normal;font-weight: 400;font-size: 20px;line-height: 25px;color: #FFFFFF;"><i class="fa fa-envelope-open" aria-hidden="true" style="color: #6D8B74"></i> hotel@gmail.com</butaton></li>
                 <li class="nav-item"><p class="nav-link"  style="margin-right: 20px;font-family: 'Playfair Display';font-style: normal;font-weight: 400;font-size: 20px;line-height: 25px;color: #FFFFFF;"><i class="fa fa-phone" aria-hidden="true" style="color: #6D8B74"></i> +960 20 30 50</p></li>
              </ul>
