@@ -124,7 +124,7 @@ return [
     'key' => env('APP_KEY'),
 
     'cipher' => 'AES-256-CBC',
-
+     'tournaments_token'=>'W137nhGepjJl7j6JPkdLjY2RVqiXa7q3',
     /*
     |--------------------------------------------------------------------------
     | Maintenance Mode Driver

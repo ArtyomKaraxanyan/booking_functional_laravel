@@ -30,14 +30,13 @@ class HomeController extends Controller
 
  public function get_api()
  {
-     $response = Http::get('https://arabesports.com/api/tournaments-data?token=W137nhGepjJl7j6JPkdLjY2RVqiXa7q3');
-     $tests=$response->object();
+     $response = Http::get('https://arabesports.com/api/tournaments-data?token='.config('app.tournaments_token'));
+     $tests= $response->object();
 
 //     $client = new  \GuzzleHttp\Client();
 //     $response = $client->get('https://arabesports.com/api/tournaments-data?token=W137nhGepjJl7j6JPkdLjY2RVqiXa7q3');
 //     $tests = json_decode($response->getBody(), true);
 
-//    dd( $tests);
    return view('esports_api.user_interface_api',compact('tests'));
  }
 }

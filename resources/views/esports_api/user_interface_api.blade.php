@@ -30,9 +30,11 @@
 
     @foreach($tests as $test)
     <tr>
+
         <td>{{$test->id}}</td>
         <td>{{$test->name}}</td>
         <td>{{$test->game->name}}</td>
+
     </tr>
     @endforeach
 </table>
