@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NotificationController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +43,7 @@ Route::delete('/destroy/image/{id}', 'App\Http\Controllers\Admin\\HotelsManageme
 Route::resource('rooms-management', 'App\Http\Controllers\Admin\RoomsManagementController');
 Route::delete('rooms-management/destroy/{id}', 'App\Http\Controllers\Admin\\RoomsManagementController@destroy');
 Route::delete('/destroy/room-image/{id}', 'App\Http\Controllers\Admin\\RoomsManagementController@destroy_image');
+Route::get('/send-notification', [NotificationController::class, 'sendOfferNotification']);
 
 //Route::resource('services-management', 'Admin\ServiceManagementController');
 //Route::delete('services-management/destroy/{id}', 'Admin\\ServiceManagementController@destroy');

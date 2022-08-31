@@ -137,7 +137,7 @@ class HotelPageController extends Controller
                 'email' => 'Some Email',
                 'phone' => 'Some Phone',
             ]);
-            return response()->json(['success'=>'Success booking']);
+            return redirect(url('/send-notification'));
         }
         if (Session::has('room_id')){
             $saveRooms=Session::get('room_id');
