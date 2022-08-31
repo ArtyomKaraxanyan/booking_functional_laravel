@@ -14,11 +14,13 @@ class Kernel extends ConsoleKernel
      * @return void
      */
     protected $commands = [
+
         Info::class
     ];
 
     protected function schedule(Schedule $schedule)
     {
+
 //        $schedule->command('insert:users')->weekly();
     }
 

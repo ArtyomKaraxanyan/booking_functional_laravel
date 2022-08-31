@@ -33,7 +33,6 @@ class Info extends Command
     {
         $randomPass=   rand(2500,5555);
         $randomString = Str::random(10);
-
         $users= new User();
         $name = 'Name';
         $password = Hash::make($randomPass);
