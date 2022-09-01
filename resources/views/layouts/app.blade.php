@@ -79,11 +79,26 @@
             text: 'You have not saved room',
         });
     }
+    function SwalNotDays(){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'You have not chosen days',
+        });
+    }
        $(document).on('click','.show_save_rooms',function (e) {
            e.preventDefault();
                SwalNotRoom()
        });
-
+    function SwalconfirmBook(){
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Have a nice holidays',
+            showConfirmButton: false,
+            timer: 1500
+        });
+    }
 
     function Swalconfirm(data){
         Swal.fire({
@@ -784,7 +799,7 @@ $(document).on('click', '.booking', function () {
     });
     }
     else{
-        alert('I see you Choose a day! ')
+      SwalNotDays();
     }
 
 });
