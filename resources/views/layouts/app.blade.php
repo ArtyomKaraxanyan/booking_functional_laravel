@@ -72,6 +72,43 @@
 </script>
 
 <script type="text/javascript">
+
+    $(document).on('click','.post_comment',function (event) {
+        event.preventDefault();
+        let name=$('#comment_name').val();
+        let country=$('#feel_back_country').val();
+        let email=$('#comment_email').val();
+        let subject=$('#comment_subject').val();
+        let message=$('#comment_message').val();
+        let hotelId=$('#comment_hotel_id').val();
+        let url =$('.send_comment').data('url');
+
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': "{{csrf_token()}}",
+            },
+            url: url,
+            method: "GET",
+            data: {name:name,email:email,subject:subject,message:message,hotelId:hotelId},
+        }).done(function (data) {
+            $.each(data.errors, function(key, value){
+                function SwalValidComment(value){
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: value,
+                    });
+                }
+                SwalValidComment(value)
+            });
+
+            $('.comment-content').append(data)
+            $('#comment_name').val("");
+            $('#comment_email').val("");
+            $('#comment_subject').val("");
+            $('#comment_message').val("");
+        });
+    });
     function SwalNotRoom(){
         Swal.fire({
             icon: 'error',

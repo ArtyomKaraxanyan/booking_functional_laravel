@@ -16,6 +16,10 @@ class Hotels extends Model
 
         return $this->hasMany(HotelImage::class,'hotel_id');
     }
+    public  function  comments(){
+
+        return $this->hasMany(Comment::class,'hotel_id');
+    }
     public  function  rooms(){
 
         return $this->hasMany(Rooms::class,'hotel_id');

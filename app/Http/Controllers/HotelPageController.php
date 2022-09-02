@@ -9,13 +9,16 @@ use App\Models\RoomImage;
 use App\Models\Rooms;
 use Illuminate\Http\Request;
 use App\Models\Hotels;
+use App\Models\Comment;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use function PHPSTORM_META\type;
-
+use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
+use DateTimeZone;
 
 class HotelPageController extends Controller
 {
@@ -80,7 +83,6 @@ class HotelPageController extends Controller
             $view_data['hotel_rooms'] = view('partials.rooms', compact('hotel','rooms','count','type'))->render();
             return $view_data;
         }
-
         $hotel = Hotels::find($id);
         $hotels = Hotels::orderBy('name')->get();
         $rooms= $hotel->rooms;
@@ -262,6 +264,36 @@ class HotelPageController extends Controller
               return redirect(url('/'));
           }
         return response(['massage'=>'The Room is forgotten']);
+
+    }
+
+    public function post_comment(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+        'name' => 'required|max:50',
+        'email' => 'required|max:50|email',
+        'subject' => 'required|max:50',
+        'message' => 'required|max:150',
+    ]);
+        if ($validator->fails()) {
+            return response()->json(['errors'=>$validator->errors()->all()]);
+        }
+
+        $comment=new Comment();
+        $comment->name= $request->name;
+        $comment->email=$request->email;
+        $comment->hotel_id=$request->hotelId;
+        $comment->subject=$request->subject;
+        $comment->comment=$request->message;
+        $comment->save();
+        $nowInLondonTz = Carbon::now(new DateTimeZone('Asia/Yerevan'));
+        $comment_details=['name'=>$request->name,
+            'email'=>$request->email,
+            'subject'=> $request->subject,
+            'message'=>$request->message ];
+        return view('partials.comment',compact('comment_details','nowInLondonTz'))->render();
+
 
     }
 }

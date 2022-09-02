@@ -21,8 +21,6 @@ class Rooms extends Model
     }
     public  function  hotel(){
         return $this->belongsTo(Hotels::class);
-
-
     }
 
     public function getImagePathAttribute(){

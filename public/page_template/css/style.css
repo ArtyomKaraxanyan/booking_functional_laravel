@@ -2222,7 +2222,7 @@ justify-content: center;
   color: #fff;
   text-transform: uppercase;
   font-weight: 600;
-  background: #f8b600;
+  background: #4E4F2F;
   display: inline-block;
   padding: 7px 44px;
   -webkit-transition: all 0.2s linear;
@@ -2231,11 +2231,11 @@ justify-content: center;
 }
 
 .comment-form .primary-btn:before {
-  background: #f3c300;
+  background: #4E4F2F;
 }
 
 .comment-form .primary-btn:hover {
-  border-color: #f3c300 !important;
+  border-color: #4E4F2F !important;
   color: #fff  !important;
 }
 

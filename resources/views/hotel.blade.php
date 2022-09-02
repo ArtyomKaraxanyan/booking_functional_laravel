@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <section class="banner_area">
-        <div class="booking_table d_flex align-items-center">
+        <div class="booking_table d_flex align-items-center ">
             <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0"
                  data-background=""></div>
 
@@ -189,6 +189,51 @@
         </div>
     </section>
 
+    <section>
+            <div class="comments-area send_comment" data-url='{{route('post_comment')}}' style="background-color: #efead8">
+                <h4>Comments</h4>
+                <div class="comment-content">
+                    @foreach($hotel->comments as $comment)
+                        <div class="comment-list">
+                    <div class="single-comment justify-content-between d-flex">
+                        <div class="user justify-content-between d-flex">
+                            <div class="thumb">
+                            </div>
+                            <div class="desc">
+                                <h5><a href="#">{{ucfirst($comment->name)}}</a></h5>
+                                <p class="date">  {{$comment->created_at}} </p>
+                                <p class="comment">
+                                   {{$comment->comment}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    @endforeach
+                </div>
+            </div>
+        <div class="comment-form"  style="background-color: #efead8">
+            <h4>Leave a Reply</h4>
+            <form>
+                <div class="form-group form-inline">
+                    <div class="form-group col-lg-6 col-md-6 name">
+                        <input type="text" class="form-control" id="comment_name" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">
+                    </div>
+                    <div class="form-group col-lg-6 col-md-6 email">
+                        <input type="email" class="form-control" id="comment_email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="comment_subject" placeholder="Subject" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Subject'">
+                </div>
+                <div class="form-group">
+                    <textarea maxlength="150" class="form-control mb-10" rows="5" id="comment_message" name="comment_message" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
+                </div>
+                <input type="hidden" id="comment_hotel_id" value="{{$hotel->id}}">
+                <a href="#" class="primary-btn button_hover post_comment">Post Comment</a>
+            </form>
+        </div>
+    </section>
 
     <section class="accomodation_area section_gap facilities_area_availability ">
         <div class="availability_title text-center" >

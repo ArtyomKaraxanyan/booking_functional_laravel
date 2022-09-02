@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\HotelPageController;
 
 
 /*
@@ -44,6 +45,7 @@ Route::resource('rooms-management', 'App\Http\Controllers\Admin\RoomsManagementC
 Route::delete('rooms-management/destroy/{id}', 'App\Http\Controllers\Admin\\RoomsManagementController@destroy');
 Route::delete('/destroy/room-image/{id}', 'App\Http\Controllers\Admin\\RoomsManagementController@destroy_image');
 Route::get('/send-notification', [NotificationController::class, 'sendOfferNotification']);
+Route::get('/send-post', [HotelPageController::class, 'post_comment'])->name('post_comment');
 
 //Route::resource('services-management', 'Admin\ServiceManagementController');
 //Route::delete('services-management/destroy/{id}', 'Admin\\ServiceManagementController@destroy');
